@@ -1,0 +1,51 @@
+extends layout/layout.pug
+
+block content
+  if page.type === 'tags'
+    .tag-cloud
+      .tag-cloud__title= _p('page.tag')
+        |  - 
+        span.tag-cloud__amount= site.tags.length
+      .tag-cloud-tags!= tagcloud({min_font: 20, max_font: 43, amount: 200, color: true, start_color: '#A4D8FA', end_color: '#0790E8'})
+      if page.comments !== false
+        include partial/comment.pug
+
+
+  else if page.type === 'categories'
+    #post-content.category-content
+      .category-lists
+        .category__title= _p('page.category')
+          |  - 
+          span.category__amount= site.categories.length
+        div!= list_categories()
+      if page.comments !== false
+        include partial/comment.pug
+
+
+  //- games page
+  //- else if page.type === 'games'
+  //-   each game, index in games
+  //-     a(href=url_for(game.path))
+  //-       img.post_bg.lozad(data-src='/img/page_img/' + game.title + '.png' title=game.title)
+      //- .card-item
+      //-   if index % 2 == 0
+      //-     .card-img.card-left
+      //-       a(href=url_for(game.path))
+      //-         img.post_bg.lozad(data-src='/img/page_img/' + game.title + '.png' title=game.title)
+      //-   else
+      //-     .card-img.card-right
+      //-       a(href=url_for(game.path))
+      //-         img.post_bg.lozad(data-src='/img/page_img/' + game.title + '.png' title=game.title)
+      //-   .card-info
+      //-     a(href=url_for(game.path) title=game.title)= game.title
+
+  else
+    #page!= page.content
+    //- article#page
+    //-   h1= page.title
+    //-   .article-container!= page.content
+    //-   include partial/pagination.pug
+    //-   if page.comments !== false
+    //-     include partial/comment.pug
+    //- #aside_content.aside_content
+    //-   include partial/aside.pug

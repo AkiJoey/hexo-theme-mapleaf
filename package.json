@@ -1,0 +1,61 @@
+{
+  "name": "hexo-theme-lotus",
+  "version": "0.0.1",
+  "description": "A fantastic hexo theme.",
+  "scripts": {
+    "lint:script": "eslint .",
+    "lint:style": "stylelint **/*.styl",
+    "lint": "npm run lint:script && npm run lint:style",
+    "test": "npm run lint",
+    "format": "prettier -w ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akijoey/hexo-theme-lotus.git"
+  },
+  "keywords": [
+    "hexo",
+    "theme"
+  ],
+  "author": "AkiJoey <akijoey@akijoey.com> (https://akijoey.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/akijoey/hexo-theme-lotus/issues"
+  },
+  "homepage": "https://github.com/akijoey/hexo-theme-lotus#readme",
+  "dependencies": {
+    "hexo-renderer-pug": "^1.0.0",
+    "hexo-renderer-rollup": "^0.0.4",
+    "hexo-renderer-stylus": "^2.0.1"
+  },
+  "devDependencies": {
+    "@akijoey/eslint-config": "latest",
+    "@akijoey/prettier-config": "latest",
+    "@akijoey/stylelint-config": "latest",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "eslint": "^7.14.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.2",
+    "prettier": "^2.2.1",
+    "stylelint": "^13.8.0",
+    "stylelint-plugin-stylus": "^0.10.0"
+  },
+  "stylelint": {
+    "extends": "@akijoey/stylelint-config"
+  },
+  "prettier": "@akijoey/prettier-config",
+  "commitlint": {
+    "extends": "@commitlint/config-conventional"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --fix",
+    "*.styl": "stylelint --fix",
+    "*.{js,styl,json,yml,md}": "prettier -w"
+  }
+}

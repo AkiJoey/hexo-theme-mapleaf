@@ -1,0 +1,78 @@
+//- background image
+if is_post()
+  - var top_img =  page.top_img || page.cover || theme.post_meta.top_img || theme.post_img || theme.top_img || config.top_img
+else if is_archive()
+  - var top_img = theme.archive_img || theme.top_img || config.top_img
+else
+  - var top_img = page.top_img || theme.top_img || config.top_img
+- var bg_img = top_img && top_img !== true ? `background-image: url(${top_img})` : ''
+//- header title
+- var title = page.title || config.title
+if (!is_home() && !is_post())
+  - var type = page.type || page.tag || page.category || page.title
+  - var title = type.charAt(0).toUpperCase() + type.slice(1)
+
+
+//- sidebar button
+if is_post()
+  if (page.toc != false && theme.toc.enable)
+    i.fa.fa-arrow-right#toggle-sidebar(aria-hidden="true")
+    include ../partial/sidebar.pug
+
+
+header.filter(style=bg_img)
+  include ../partial/navgation.pug
+  #header-info
+    #header-title
+      span= title
+    if is_home()
+      #header-subtitle
+        span.subtitle
+      if theme.social
+        #header-social
+          each url, icon in theme.social
+            a.social-icon(href=url target="_blank")
+              i(class=icon)
+    else if is_post()
+      #header-meta
+        .meta-line
+          span.meta-item
+            i.far.fa-calendar-alt.fa-fw(aria-hidden="true")
+            span= _p('post.created') + ' '
+            time= date(page.date, config.date_format)
+          span.meta-separator -
+          span.meta-item
+            i.fas.fa-history.fa-fw(aria-hidden="true")
+            span= _p('post.created') + ' '
+            time= date(page.updated, config.date_format)
+          span.meta-separator -
+          span.meta-item
+            each item, index in page.categories.data
+              i.fas.fa-inbox.fa-fw(aria-hidden="true")
+              a(href=url_for(item.path)) #[=item.name]
+              if (index < page.categories.data.length - 1)
+                i.fas.fa-angle-right.meta-separator
+        .meta-line
+          span.meta-item
+            i.far.fa-file-word.fa-fw(aria-hidden="true")
+            span= _p('post.wordcount') + ' : '
+            span= wordcount(page.content)
+          span.meta-separator -
+          span.meta-item
+            i.far.fa-clock.fa-fw(aria-hidden="true")
+            span= _p('post.readtime') + ' ≈ '
+            span= min2read(page.content, { cn: 350, en: 160 }) + ' min'
+          span.meta-separator -
+          span.meta-item
+            i.far.fa-eye.fa-fw(aria-hidden="true")
+            span= _p('post.postview') + ' : '
+            span#busuanzi_value_page_pv
+          span.meta-separator -
+          span.meta-item
+            i.far.fa-comments.fa-fw(aria-hidden="true")
+            span= _p('post.comment') + ' : '
+              a(href=url_for(page.path) + '#post-comment')
+                span.gitalk-comment-count.comment-count 0
+  if is_home()
+    #header-down
+      i.fas.fa-angle-down

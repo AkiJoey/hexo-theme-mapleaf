@@ -1,0 +1,49 @@
+section
+  each article, index in page.posts.data
+    - const title = article.title || _p('no_title')
+    - const cover = article.cover || random_cover()
+    - const link = article.link || article.path
+    - const side = index % 2 ? 'left' : 'right'
+    article.article.card
+      .article-cover(class=`article-cover-${side}`)
+        a(href=url_for(link))
+          img.lozad(data-src=`${cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'` title=title)
+
+      .article-info(class=`article-info-${side}`)
+        a.article-info-title(href=url_for(link))= title
+        .article-info-meta
+          .meta-line
+            if article.top
+              span.meta-item.sticky
+                i.fas.fa-thumbtack.fa-fw(aria-hidden="true")
+                span= _p('sticky')
+              span.meta-separator -
+            span.meta-item
+              i.far.fa-calendar-alt.fa-fw(aria-hidden="true")
+              time= date(page.date, config.date_format)
+            span.meta-separator -
+            span.meta-item
+              i.fas.fa-inbox.fa-fw(aria-hidden="true")
+              each item, index in article.categories.data
+                a(href=url_for(item.path)) #[=item.name]
+                if index < article.categories.data.length - 1
+                  i.fas.fa-angle-right.meta-separator
+            span.meta-separator -
+            span.meta-item
+              - const icon = article.tags.data.length > 1 ? 'tags' : 'tag'
+              i.fas.fa-fw(aria-hidden="true" class=`fa-${icon}`)
+              each item, index in article.tags.data
+                a(href=url_for(item.path)) #[=item.name]
+                if index < article.tags.data.length - 1
+                  span.meta-separator ·
+
+        if article.description && article.description.length > 50
+          .article-info-content!= article.description
+        else
+          - const content = strip_html(article.content)
+          - let expert = content.substring(0, 100)
+          - content.length > 100 ? expert += ' ...' : ''
+          .article-content!= expert
+        a.article-info-more.fas.fa-ellipsis-h(href=url_for(link))
+
+  include pagination.pug

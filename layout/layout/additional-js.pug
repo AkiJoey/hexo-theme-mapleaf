@@ -1,0 +1,31 @@
+if (theme.katex && theme.katex.enable)
+  if(!is_tag() && !is_category() && !is_archive())
+    link(rel="stylesheet" type="text/css" href=theme.katex.cdn.css)
+    script(src='https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js')
+    link(rel="stylesheet" type="text/css" href='https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css')
+    script.
+      $(function () {
+        $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+      })
+if (theme.local_search && theme.local_search.enable)
+  script(async src=url_for('/js/search/local-search.js'))
+
+if theme.baidu_push && theme.baidu_push.enable
+  script(src=url_for('js/baidupush.js'))
+
+
+if is_home() && theme.subtitle.enable
+  script(src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9")
+  script.
+    var typed = new Typed(".subtitle", {
+      strings: ['!{theme.subtitle.sub1}','!{theme.subtitle.sub2}'],
+      startDelay: 300,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50
+    });
+
+if theme.busuanzi.site_uv || theme.busuanzi.site_pv || theme.busuanzi.page_pv
+  script(async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js")
+  
+script(src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module")

@@ -1,0 +1,26 @@
+footer
+  //- background
+  #background
+    figure
+    figure
+
+  //- copyright
+  #copyright
+    - var year = (new Date()).getFullYear()
+    if theme.since && theme.since != year
+      != `&copy;${theme.since} - ${year} By ${config.author}`
+    else
+      != `&copy;${year} By ${config.author}`
+
+  //- framework
+  #framework
+    span= 'Powered by '
+    a(href='https://hexo.io')= 'Hexo'
+    span= ' - Theme '
+    a(href='https://github.com/akijoey/lotus')= 'Lotus'
+
+  //- icp info
+  if theme.ICP.enable
+    .icp
+      a(href=theme.ICP.url)
+        span=theme.ICP.text

@@ -1,0 +1,53 @@
+-
+  //- title
+  var title = page.title || config.title || ''
+  if (is_archive())
+    title = _p('page.archives')
+  else if (is_tag())
+    title = _p('page.tag') + ': ' + page.tag
+  else if (is_category())
+    title = _p('page.category') + ': ' + page.category
+  else if (is_month())
+    title += ': ' + page.month + '/' + page.year
+  else if (is_year())
+    title += ': ' + page.year
+  else if (is_current('/404.html', [strict]))
+    title = _p('error404.error_title')
+
+  //- information
+  var author = config.email ? config.author + ',' + config.email : config.author
+  var copyright = config.copyright || config.author
+  var description = page.description || page.title || config.description || ''
+  var keywords = (page.tags && page.tags.data) ? page.tags.data.map(tag => tag.name).join(',') : (config.keywords || []).join(',')
+
+  ///- page type
+  if (is_home())
+    page.type = 'home'
+  else if (is_archive())
+    page.type = 'archive'
+  else if (is_post())
+    page.type = 'post'
+
+
+  var games = [
+    {
+      title: 'th1',
+      path: 'games/th1/th1.html'
+    },
+    {
+      title: 'th2',
+      path: 'games/th2/th2.html'
+    },
+    {
+      title: 'th3',
+      path: 'games/th3/th3.html'
+    },
+    {
+      title: 'th4',
+      path: 'games/th4/th4.html'
+    },
+    {
+      title: 'th5',
+      path: 'games/th5/th5.html'
+    }
+  ]

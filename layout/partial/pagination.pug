@@ -1,56 +1,24 @@
 -
-  var options = {
-    prev_text: '<i class="fa fa-chevron-left" aria-hidden="true"></i>',
-    next_text: '<i class="fa fa-chevron-right" aria-hidden="true"></i>',
-    mid_size: 1
+  const options = {
+    prev_text: '<i class="fas fa-chevron-left fa-fw"></i>',
+    next_text: '<i class="fas fa-chevron-right fa-fw"></i>',
+    mid_size: 1,
+    escape: false
   }
 
-if(!is_post())
-  #pagination
-    div.pagination
-      !=paginator(options)
-else
-  #pagination.pagination_post
-    if(page.prev)
-      if(page.next)
-        .prev-post.pull-left
-          - var pagination_cover = page.prev.cover || theme.default_cover
-          a(href=url_for(page.prev.path))
-            img.prev_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'` )
-            .label=_p('pagination.prev')
-            .prev_info
-              //- i.fa.fa-chevron-left   
-              span=page.prev.title
-      else
-        .prev-post.pull-full
-          - var pagination_cover = page.prev.cover || theme.default_cover
-          a(href=url_for(page.prev.path))
-            img.prev_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            .label=_p('pagination.prev')
-            .prev_info
-              //- i.fa.fa-chevron-left   
-              span=page.prev.title
+mixin pagination(direction)
+  div(id=`pagination-${direction}`)
+    a(href=url_for(page[direction].path))
+      - const cover = page[direction].cover || theme.default_cover
+      img.lozad(data-src=`${cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
+      span= _p(`pagination.${direction}`)
+      span= page[direction].title
 
-          
-
-    if(page.next)
-      if(page.prev)
-        .next-post.pull-right
-          - var pagination_cover = page.next.cover || theme.default_cover
-          a(href=url_for(page.next.path))
-            img.next_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            .label=_p('pagination.next')
-            .next_info
-              span=page.next.title 
-              //- i.fa.fa-chevron-right
-      else
-        .next-post.pull-full
-          - var pagination_cover = page.next.cover || theme.default_cover
-          a(href=url_for(page.next.path))
-            img.next_cover.lozad(data-src=`${pagination_cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'`)
-            .label=_p('pagination.next')
-            .next_info
-              span=page.next.title 
-              //- i.fa.fa-chevron-right
-      
-
+#pagination
+  if is_post()
+    if page.prev
+      +pagination('prev')
+    if page.next
+      +pagination('next')
+  else
+    != paginator(options)

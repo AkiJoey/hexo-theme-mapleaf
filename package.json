@@ -23,11 +23,6 @@
     "url": "https://github.com/akijoey/hexo-theme-lotus/issues"
   },
   "homepage": "https://github.com/akijoey/hexo-theme-lotus#readme",
-  "dependencies": {
-    "hexo-renderer-pug": "^1.0.0",
-    "hexo-renderer-rollup": "^0.0.4",
-    "hexo-renderer-stylus": "^2.0.1"
-  },
   "devDependencies": {
     "@akijoey/eslint-config": "latest",
     "@akijoey/prettier-config": "latest",

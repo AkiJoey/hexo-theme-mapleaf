@@ -10,7 +10,6 @@ block content
       if page.comments !== false
         include partial/comment.pug
 
-
   else if page.type === 'categories'
     #post-content.category-content
       .category-lists
@@ -21,31 +20,5 @@ block content
       if page.comments !== false
         include partial/comment.pug
 
-
-  //- games page
-  //- else if page.type === 'games'
-  //-   each game, index in games
-  //-     a(href=url_for(game.path))
-  //-       img.post_bg.lozad(data-src='/img/page_img/' + game.title + '.png' title=game.title)
-      //- .card-item
-      //-   if index % 2 == 0
-      //-     .card-img.card-left
-      //-       a(href=url_for(game.path))
-      //-         img.post_bg.lozad(data-src='/img/page_img/' + game.title + '.png' title=game.title)
-      //-   else
-      //-     .card-img.card-right
-      //-       a(href=url_for(game.path))
-      //-         img.post_bg.lozad(data-src='/img/page_img/' + game.title + '.png' title=game.title)
-      //-   .card-info
-      //-     a(href=url_for(game.path) title=game.title)= game.title
-
   else
     #page!= page.content
-    //- article#page
-    //-   h1= page.title
-    //-   .article-container!= page.content
-    //-   include partial/pagination.pug
-    //-   if page.comments !== false
-    //-     include partial/comment.pug
-    //- #aside_content.aside_content
-    //-   include partial/aside.pug

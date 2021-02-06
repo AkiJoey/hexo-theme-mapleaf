@@ -21,15 +21,14 @@ html(lang=config.language)
     //- favicon
     != favicon_tag(config.favicon || theme.favicon || '/favicon.ico')
 
-    //- cdn styles
-    if theme.cdn.css !== undefined
-      each url in theme.cdn.css
-        link(rel='stylesheet', href=url)
-
-    //- local styles
-    if theme.styles !== undefined && theme.styles.length > 0
-      each url in theme.styles
-        link(rel='stylesheet', href=url_for(url))
+    //- styles
+    if theme.styles !== undefined
+      if theme.styles.remote !== undefined && theme.styles.remote.length > 0
+        each url in theme.styles.remote
+          link(rel='stylesheet' href=url)
+      if theme.styles.local !== undefined && theme.styles.local.length > 0
+        each url in theme.styles.local
+          link(rel='stylesheet' href=url_for(url))
 
     include additional-head.pug
   
@@ -39,14 +38,13 @@ html(lang=config.language)
     include content.pug
     include footer.pug
 
-    //- cdn scripts
-    if theme.cdn.js !== undefined
-      each url in theme.cdn.js
-        script(src=url)
-
-    //- local scripts
-    if theme.scripts !== undefined && theme.scripts.length > 0
-      each url in theme.scripts
-        script(src=url_for(url))
+    //- scripts
+    if theme.scripts !== undefined
+      if theme.scripts.remote !== undefined && theme.scripts.remote.length > 0
+        each url in theme.scripts.remote
+          script(src=url)
+      if theme.scripts.local !== undefined && theme.scripts.local.length > 0
+        each url in theme.scripts.local
+          script(src=url_for(url))
     
     include additional-js.pug

@@ -6,8 +6,8 @@ section
     - const side = index % 2 ? 'left' : 'right'
     article.article.card
       .article-cover(class=`article-cover-${side}`)
-        a(href=url_for(link))
-          img.lozad(data-src=`${cover}` onerror=`onerror=null;src='${theme.lodding_bg.post_page}'` title=title)
+        a(href=url_for(link)).filter
+          img(data-src=`${cover}` title=title)
 
       .article-info(class=`article-info-${side}`)
         a.article-info-title(href=url_for(link))= title

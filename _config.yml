@@ -1,3 +1,32 @@
+# hexo-theme-lotus
+
+# layout
+
+# page
+
+# index:
+#   cover:
+#   aside:
+
+# archives:
+#   cover:
+#   aside:
+
+# tags:
+#   cover:
+#   aside:
+
+# categories:
+#   cover:
+#   aside:
+
+
+
+
+
+
+
+
 # Theme color for customize
 # Notice: color value must in double quotes like "#000" or may cause error!
 # ---------------
@@ -50,9 +79,9 @@ date: 7/28/2019
 
 # Highlight theme
 # ---------------
-highlight_theme: light
+highlight_theme: mac light
 highlight_copy: true
-
+highlight_shrink: true
 code_word_wrap: false
 
 # Nav settings
@@ -112,29 +141,25 @@ katex:
 google_analytics:
 
 
-# styles loaded in the end of the head
+# styles (loaded in the end of the head)
 styles:
-  - /style/main.css
+  local:
+    - /styles/main.css
+  remote:
+    - https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css                # fontawesome
+    - https://fonts.googleapis.com/css?family=Titillium+Web                                     # googlefont
+    - https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css      # fancybox
 
-# scripts loaded in the end of the body
+# scripts (loaded in the end of the body)
 scripts:
-  - /script/main.js
-
-# cdn for third-party library
-# ---------------
-cdn:
-  css:
-    fontawesome: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css
-    # fontawesomeV5: https://use.fontawesome.com/releases/v5.8.1/css/all.css
-    googlefont: https://fonts.googleapis.com/css?family=Titillium+Web
-    fancybox: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css
-  js:
-    jquery: https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js
-    fancybox: https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js
-    js-cookies: https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js
-    lozy: https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js
-    # ribbon: https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js
-    click: https://cdn.jsdelivr.net/gh/diygod/diygod.me@latest/themes/sagiri/src/cursor-effects.js
+  local:
+    - /scripts/main.js
+  remote:
+    - https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js                             # jquery
+    - https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js       # fancybox
+    - https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js                             # js-cookies
+    - https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js                                      # lozy
+    - https://cdn.jsdelivr.net/gh/diygod/diygod.me@latest/themes/sagiri/src/cursor-effects.js   # click
 
 
 # Post info settings
@@ -160,8 +185,6 @@ archive_img: https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/archive.jpg
 lodding_bg:
   flink: /img/friend_404.gif
   post_page: /img/404.jpg
-
-
 
 
 post:
@@ -322,16 +345,6 @@ subtitle:
   enable: true
   sub1: OUT OF THE LIGHT
   sub2: INTO THE SHADOWS
-
-#側邊欄顯示設置
-aside:
-  card_author: true
-  card_announcement: true
-  card_recent_post: true
-  card_categories: true
-  card_tags: true
-  card_archives: true
-  card_webinfo: true
 
 
 ## chinese traditional to Simplified

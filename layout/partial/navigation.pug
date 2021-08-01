@@ -1,0 +1,7 @@
+nav
+  a#nav-title(href=url_for('/'))= config.title
+  span#nav-content
+    each value, label in theme.menu
+      a(href=value.split('||')[0])
+        i.fa-fw(class=value.split('||')[1])
+        span= label

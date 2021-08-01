@@ -151,13 +151,27 @@ else if (!is_post() && preload_img)
     })
   }
 
+  let highlight = 'undefined';
+  if ((config.highlight && config.highlight.enable) || (config.prismjs && config.prismjs.enable)) {
+    highlight = JSON.stringify({
+      plugin: config.highlight.enable ? 'highlighjs' : 'prismjs',
+      highlightCopy: theme.highlight_copy,
+      highlightLang: theme.highlight_lang,
+      highlightShrink: theme.highlight_shrink
+    })
+  }
+
+-
+  const obj = {
+    test: '123'
+  }
 script.
   var GLOBAL_CONFIG = { 
     root: '!{config.root}',
     algolia: !{algolia},
     localSearch: !{localSearch},
     translate: !{translate},
-    highlight_copy: '!{theme.highlight_copy}',
+    highlight: !{highlight},
     copy: {
       success: '!{_p("copy.success")}',
       error: '!{_p("copy.error")}',
@@ -169,5 +183,12 @@ script.
       message_next: '!{_p("bookmark.message_next")}'
     },
     type: '!{page.type}'
+  }
+  var config = {
+    isAnchor: true,
+    obj: JSON.parse('!{JSON.stringify(obj)}'),
+    error: {
+      cover: '!{theme.lodding_bg.post_page}'
+    }
   }
 

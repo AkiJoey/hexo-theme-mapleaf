@@ -7,14 +7,14 @@ block content
 
     #post-copyright
       .post-copyright-item
-        title= _p('post.copyright.author') + ": "
+        span= _p('post.copyright.author') + ": "
         a(href=`mailto:${config.email}`)= config.author
       .post-copyright-item
-        title= _p('post.copyright.link') + ": "
-        a(href=url_for(page.permalink))= page.permalink
+        span= _p('post.copyright.copyright_notice') + ": "
+        a(href=url_for(theme.post_copyright.license_url))= theme.post_copyright.license
       .post-copyright-item
-        title= _p('post.copyright.copyright_notice') + ": "
-        span!= _p('post.copyright.copyright_content', theme.post_copyright.license_url, theme.post_copyright.license, config.url, config.title)
+        span= _p('post.copyright.link') + ": "
+        a(href=url_for(page.permalink))= page.permalink
     
     #post-share
       #post-share-tags
@@ -27,3 +27,4 @@ block content
 
     include partial/pagination.pug
     include partial/comment.pug
+  include partial/aside.pug

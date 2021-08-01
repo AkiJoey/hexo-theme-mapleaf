@@ -1,4 +1,7 @@
 extends layout/layout.pug
 
 block content
-  include partial/article.pug
+  if page.type === 'categories'
+    #category.card!= list_categories()
+  else
+    include partial/article.pug

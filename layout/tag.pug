@@ -1,4 +1,16 @@
 extends layout/layout.pug
 
 block content
-  include partial/article.pug
+  if page.type === 'tags'
+    -
+      const options = {
+        min_font: 25,
+        max_font: 45,
+        amount: 200,
+        color: true,
+        start_color: '#a4d8fa',
+        end_color: '#0790e8'
+      }
+    #tag.card!= tagcloud(options)
+  else
+    include partial/article.pug

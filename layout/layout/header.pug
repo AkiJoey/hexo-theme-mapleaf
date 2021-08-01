@@ -12,16 +12,8 @@ if (!is_home() && !is_post())
   - var type = page.type || page.tag || page.category || page.title
   - var title = type.charAt(0).toUpperCase() + type.slice(1)
 
-
-//- sidebar button
-if is_post()
-  if (page.toc != false && theme.toc.enable)
-    i.fa.fa-arrow-right#toggle-sidebar(aria-hidden="true")
-    include ../partial/sidebar.pug
-
-
-header.filter(style=bg_img)
-  include ../partial/navgation.pug
+header
+  include ../partial/navigation.pug
   #header-info
     #header-title
       span= title
@@ -76,3 +68,5 @@ header.filter(style=bg_img)
   if is_home()
     #header-down
       i.fas.fa-angle-down
+  #header-background(class=(is_home() ? '' : 'filter'))
+    img(src=top_img)

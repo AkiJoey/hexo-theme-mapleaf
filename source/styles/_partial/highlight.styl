@@ -1,0 +1,789 @@
+// highlight
+
+
+// set config variables
+$highlight_theme = hexo-config('highlight_theme')
+$highlighEnable = hexo-config('rootConfig.highlight') && hexo-config('rootConfig.highlight.enable')
+$prismjsEnable = hexo-config('rootConfig.prismjs') && hexo-config('rootConfig.prismjs.enable')
+wordWrap = !hexo-config('rootConfig.highlight.line_number') && hexo-config('code_word_wrap')
+
+// theme
+if $highlight_theme == 'darker' || ($highlight_theme == 'mac')
+  $highlight-background = #212121
+  $highlight-selection = #61616150
+  $highlight-foreground = #EEFFFF
+  $highlight-mac-border = rgba(0, 0, 0, .4)
+  $highlight-gutter = {
+    color: alpha($highlight-foreground, .5),
+    bg-color: $highlight-background
+  }
+  $highlight-tools = {
+    color: alpha($highlight-foreground, .8),
+    bg-color: darken($highlight-background, 2)
+  }
+  $highlight-scrollbar = darken($highlight-background, 6)
+
+  if $highlighEnable
+    $highlight-comment = #969896
+    $highlight-red = #FF5370
+    $highlight-orange = #F78C6C
+    $highlight-yellow = #FFCB6B
+    $highlight-green = #C3E88D
+    $highlight-aqua = #89DDFF
+    $highlight-blue = #82AAFF
+    $highlight-purple = #C792EA
+    $highlight-deletion = #BF42BF
+    $highlight-addition = #105EDE
+
+if $highlight_theme == 'pale night'
+  $highlight-background = #292D3E
+  $highlight-selection = #717CB450
+  $highlight-foreground = #A6ACCD
+  $highlight-gutter = {
+    color: alpha($highlight-foreground, .5),
+    bg-color: $highlight-background
+  }
+  $highlight-tools = {
+    color: $highlight-foreground,
+    bg-color: darken($highlight-background, 2)
+  }
+  $highlight-scrollbar = darken($highlight-background, 6)
+
+  if $highlighEnable
+    $highlight-comment = #676E95
+    $highlight-red = #FF5370
+    $highlight-orange = #F78C6C
+    $highlight-yellow = #FFCB6B
+    $highlight-green = #C3E88D
+    $highlight-aqua = #89DDFF
+    $highlight-blue = #82AAFF
+    $highlight-purple = #C792EA
+    $highlight-deletion = #BF42BF
+    $highlight-addition = #105EDE
+
+if $highlight_theme == 'ocean'
+  $highlight-background = #0F111A
+  $highlight-selection = #717CB450
+  $highlight-foreground = #8F93A2
+  $highlight-gutter = {
+    color: alpha($highlight-foreground, .5),
+    bg-color: $highlight-background
+  }
+  $highlight-tools = {
+    color: $highlight-foreground,
+    bg-color: darken($highlight-background, 2)
+  }
+  $highlight-scrollbar = darken($highlight-background, 5)
+
+  if $highlighEnable
+    $highlight-comment = rgba(101, 115, 126, .8)
+    $highlight-red = #FF5370
+    $highlight-orange = #F78C6C
+    $highlight-yellow = #FFCB6B
+    $highlight-green = #C3E88D
+    $highlight-aqua = #89DDFF
+    $highlight-blue = #82AAFF
+    $highlight-purple = #C792EA
+    $highlight-deletion = #BF42BF
+    $highlight-addition = #105EDE
+
+if $highlight_theme == 'light' || ($highlight_theme == 'mac light')
+  $highlight-background = #F6F8FA
+  $highlight-selection = #80CBC440
+  $highlight-foreground = #90A4AE
+  $highlight-mac-border = rgba(144, 164, 174, .4)
+  $highlight-tools = {
+    color: $highlight-foreground,
+    bg-color: darken($highlight-background, 5)
+  }
+  $highlight-gutter = {
+    color: alpha($highlight-foreground, .5),
+    bg-color: $highlight-background
+  }
+  $highlight-scrollbar = darken($highlight-background, 8)
+
+  if $highlighEnable
+    $highlight-comment = rgba(149, 165, 166, .8)
+    $highlight-red = #E53935
+    $highlight-orange = #F76D47
+    $highlight-yellow = #FFB62C
+    $highlight-green = #91B859
+    $highlight-aqua = #39ADB5
+    $highlight-blue = #6182B8
+    $highlight-purple = #7C4DFF
+    $highlight-deletion = #BF42BF
+    $highlight-addition = #105EDE
+
+if $highlight_theme == false
+  $highlight-background = #F6F8FA
+  $highlight-foreground = #90A4AE
+  $highlight-selection = #80CBC440
+  $highlight-gutter = {
+    color: alpha($highlight-foreground, .5),
+    bg-color: $highlight-background
+  }
+  $highlight-tools = {
+    color: $highlight-foreground,
+    bg-color: darken($highlight-background, 5)
+  }
+  $highlight-scrollbar = darken($highlight-background, 8)
+
+
+// highlightjs style
+if $highlighEnable
+
+  // highlightjs diff
+  if $highlight_theme != false
+    figure.highlight
+      table
+        &::-webkit-scrollbar-thumb
+          background: $highlight-scrollbar
+
+      pre .deletion
+        color: $highlight-deletion
+
+      pre .addition
+        color: $highlight-addition
+
+      pre .meta
+        color: $highlight-purple
+
+      pre
+        .comment
+          color: $highlight-comment
+
+        .variable,
+        .attribute,
+        .regexp,
+        .ruby .constant,
+        .xml .tag .title,
+        .xml .pi,
+        .xml .doctype,
+        .html .doctype,
+        .css .id,
+        .tag .name,
+        .css .class,
+        .css .pseudo
+          color: $highlight-red
+
+        .tag
+          color: $highlight-aqua
+
+        .number,
+        .preprocessor,
+        .literal,
+        .params,
+        .constant,
+        .command
+          color: $highlight-orange
+
+        .built_in
+          color: $highlight-yellow
+
+        .ruby .class .title,
+        .css .rules .attribute,
+        .string,
+        .value,
+        .inheritance,
+        .header,
+        .ruby .symbol,
+        .xml .cdata,
+        .special,
+        .number,
+        .formula
+          color: $highlight-green
+
+        .keyword,
+        .title,
+        .css .hexcolor
+          color: $highlight-aqua
+
+        .function,
+        .python .decorator,
+        .python .title,
+        .ruby .function .title,
+        .ruby .title .keyword,
+        .perl .sub,
+        .javascript .title,
+        .coffeescript .title
+          color: $highlight-blue
+
+        .tag .attr,
+        .javascript .function
+          color: $highlight-purple
+
+  // highlightjs index
+  #post-content
+    figure.highlight
+      .line
+        if wordWrap
+          &:before
+            display: inline-block
+            padding: 0 .3rem 0 0
+            min-width: 1.6rem
+            color: $highlight-gutter.color
+            content: counter(line)
+            counter-increment: line
+            text-align: left
+
+        &.marked
+          background-color: $highlight-selection
+
+      table
+        display: block
+        overflow: auto
+        border: none
+
+        td
+          padding: 0
+          border: none
+
+      .gutter pre
+        padding-right: .5rem
+        padding-left: .5rem
+        background-color: $highlight-gutter.bg-color
+        color: $highlight-gutter.color
+        text-align: right
+
+      .code pre
+        padding-right: .5rem
+        padding-left: .5rem
+        width: 100%
+
+
+// prismjs style
+if $prismjsEnable
+
+  // prismjs line number
+  if hexo-config('rootConfig.prismjs.line_number')
+    #post-content
+      pre[class*='language-']
+        &.line-numbers
+          position: relative
+          padding-left: 3.8em
+          counter-reset: linenumber
+          line-height: $line-height-code-block
+
+          > code
+            position: relative
+            white-space: inherit
+            line-height: $line-height-code-block
+
+          .line-numbers-rows
+            position: absolute
+            top: 0
+            left: -3.8em
+            width: 3em
+            letter-spacing: -1px
+            font-size: 100%
+            pointer-events: none
+            user-select: none
+
+            & > span
+              display: block
+              counter-increment: linenumber
+              pointer-events: none
+
+              &:before
+                display: block
+                padding-right: .8em
+                color: $highlight-gutter.color
+                content: counter(linenumber)
+                text-align: right
+
+  // prismjs diff
+  if $highlight_theme != false
+    if $highlight_theme == 'light' || ($highlight_theme == 'mac light')
+      // prism-base16-ateliersulphurpool.light
+      pre[class*='language-']
+        .token.function
+          color: #ffb62c
+
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata
+          color: rgba(149, 165, 166, .8)
+
+        .token.punctuation
+          color: #5e6687
+
+        .token.namespace
+          opacity: .7
+
+        .token.operator,
+        .token.boolean,
+        .token.number
+          color: #c76b29
+
+        .token.property
+          color: #c08b30
+
+        .token.tag
+          color: #3d8fd1
+
+        .token.string
+          color: #22a2c9
+
+        .token.selector
+          color: #6679cc
+
+        .token.attr-name
+          color: #c76b29
+
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string
+          color: #22a2c9
+
+        .token.attr-value,
+        .token.keyword,
+        .token.control,
+        .token.directive,
+        .token.unit
+          color: #ac9739
+
+        .token.statement,
+        .token.regex,
+        .token.atrule
+          color: #22a2c9
+
+        .token.placeholder,
+        .token.variable
+          color: #3d8fd1
+
+        .token.deleted
+          text-decoration: line-through
+
+        .token.inserted
+          border-bottom: 1px dotted #202746
+          text-decoration: none
+
+        .token.italic
+          font-style: italic
+
+        .token.important,
+        .token.bold
+          font-weight: bold
+
+        .token.important
+          color: #c94922
+
+        .token.entity
+          cursor: help
+
+        pre > code.highlight
+          outline: .4em solid #c94922
+          outline-offset: .4em
+
+    if $highlight_theme == 'darker' || ($highlight_theme == 'mac')
+      // prism-atom-dark
+      pre[class*='language-']
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata
+          color: #7C7C7C
+
+        .token.punctuation
+          color: #c5c8c6
+
+        .namespace
+          opacity: .7
+
+        .token.property,
+        .token.keyword,
+        .token.tag
+          color: #96CBFE
+
+        .token.class-name
+          color: #FFFFB6
+
+        .token.boolean,
+        .token.constant
+          color: #99CC99
+
+        .token.symbol,
+        .token.deleted
+          color: #f92672
+
+        .token.number
+          color: #FF73FD
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted
+          color: #A8FF60
+
+        .token.variable
+          color: #C6C5FE
+
+        .token.operator
+          color: #EDEDED
+
+        .token.entity
+          color: #FFFFB6
+          cursor: help
+
+        .token.url
+          color: #96CBFE
+
+        .language-css .token.string,
+        .style .token.string
+          color: #87C38A
+
+        .token.atrule,
+        .token.attr-value
+          color: #F9EE98
+
+        .token.function
+          color: #DAD085
+
+        .token.regex
+          color: #E9C062
+
+        .token.important
+          color: #fd971f
+
+        .token.important,
+        .token.bold
+          font-weight: bold
+
+        .token.italic
+          font-style: italic
+
+    if $highlight_theme == 'pale night'
+      // prism-dracula
+      pre[class*='language-']
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata
+          color: #6272a4
+
+        .token.punctuation
+          color: #f8f8f2
+
+        .namespace
+          opacity: .7
+
+        .token.property,
+        .token.tag,
+        .token.constant,
+        .token.symbol,
+        .token.deleted
+          color: #ff79c6
+
+        .token.boolean,
+        .token.number
+          color: #bd93f9
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted
+          color: #50fa7b
+
+        .token.operator,
+        .token.entity,
+        .token.url,
+        .language-css .token.string,
+        .style .token.string,
+        .token.variable
+          color: #f8f8f2
+
+        .token.atrule,
+        .token.attr-value,
+        .token.function,
+        .token.class-name
+          color: #f1fa8c
+
+        .token.keyword
+          color: #8be9fd
+
+        .token.regex,
+        .token.important
+          color: #ffb86c
+
+        .token.important,
+        .token.bold
+          font-weight: bold
+
+        .token.italic
+          font-style: italic
+
+        .token.entity
+          cursor: help
+
+    if $highlight_theme == 'ocean'
+      // prism-material-oceanic
+      pre[class*='language-']
+        &.language-css > code,
+        &.language-sass > code,
+        &.language-scss > code
+          color: #fd9170 !important
+
+        .namespace
+          opacity: .7
+
+        .token.atrule,
+        .token.symbol,
+        .token.constant,
+        .token.boolean,
+        .token.function
+          color: #c792ea
+
+        .token.attr-name,
+        .token.builtin,
+        .token.class
+          color: #ffcb6b
+
+        .token.attr-value,
+        .token.attribute,
+        .token.pseudo-class,
+        .token.pseudo-element,
+        .token.string
+          color: #c3e88d
+
+        .token.cdata,
+        .token.property,
+        .token.char,
+        .token.inserted
+          color: #80cbc4
+
+        .token.class-name,
+        .token.color,
+        .token.hexcode,
+        .token.regex
+          color: #f2ff00
+
+        .token.comment,
+        .token.prolog,
+        .token.doctype
+          color: #546e7a
+
+        .token.deleted,
+        .token.variable,
+        .token.entity,
+        .token.selector,
+        .token.tag,
+        .token.unit
+          color: #f07178
+
+        .token.id
+          color: #c792ea
+          font-weight: bold
+
+        .token.important
+          color: #c792ea
+          font-weight: bold
+
+        .token.keyword
+          color: #c792ea
+          font-style: italic
+
+        .token.number,
+        .token.url
+          color: #fd9170
+
+        .token.operator,
+        .token.punctuation
+          color: #89ddff
+
+  // prismjs index
+  #post-content
+    pre[class*='language-']
+      &::-webkit-scrollbar-thumb
+        background: $highlight-scrollbar
+
+      &:not(.line-numbers)
+        padding: 10px 20px
+
+      .caption
+        margin-left: -3.8em
+        padding: .2rem .8rem !important
+
+        a
+          padding: 0 !important
+
+
+// common style
+$code-block
+  overflow: auto
+  margin: 0 0 1rem
+  padding: 0
+  background: $highlight-background
+  color: $highlight-foreground
+  line-height: $line-height-code-block
+
+  if wordWrap
+    counter-reset: line
+    white-space: pre-wrap
+
+blockquote
+  margin: 0 0 1rem
+  padding: .1rem .8rem
+  border-left: .2rem solid $blockquote-padding-color
+  background-color: var(--blockquote-bg)
+  color: var(--blockquote-color)
+
+  a
+    word-break: break-all
+
+  p
+    margin: 0 !important
+    padding: .5rem 0
+
+  footer
+    padding: 0 0 .5rem
+
+    cite
+      &:before
+        padding: 0 .3em
+        content: '—'
+
+#post-content
+  pre,
+  code
+    font-size: $code-font-size
+    font-family: $code-font-family !important
+
+  code
+    padding: .1rem .2rem
+    background: $code-background
+    color: $code-foreground
+    word-wrap: break-word
+    word-break: break-word
+    overflow-wrap: break-word
+
+  pre
+    @extend $code-block
+    padding: 10px 20px
+
+    code
+      padding: 0
+      background: none
+      color: $highlight-foreground
+      text-shadow: none
+
+  figure.highlight
+    @extend $code-block
+    position: relative
+
+    pre
+      margin: 0
+      padding: 8px 0
+      border: none
+
+    figcaption,
+    .caption
+      padding: .3rem 0 .1rem .7rem
+      font-size: $code-font-size
+      line-height: 1em
+
+      a
+        float: right
+        padding-right: 10px
+        color: $highlight-foreground
+
+        &:hover
+          border-bottom-color: $highlight-foreground
+
+  .highlight-tools
+    position: relative
+    display: flex
+    align-items: center
+    overflow: hidden
+    min-height: 1.2rem
+    height: 2.15em
+    background: $highlight-tools.bg-color
+    color: $highlight-tools.color
+    font-size: $code-font-size
+
+    &.closed + table
+      display: none
+
+    .expand
+      position: absolute
+      padding: .4rem .7rem
+      cursor: pointer
+      transition: transform .3s
+
+      & + .code-lang
+        left: 1.7rem
+
+      &.closed
+        transition: all .3s
+        transform: rotate(-90deg) !important
+
+    .code-lang
+      position: absolute
+      left: .7rem
+      text-transform: uppercase
+      font-weight: bold
+      font-size: 1.15em
+      user-select: none
+
+    .copy-notice
+      position: absolute
+      right: 1.7rem
+      opacity: 0
+      transition: opacity .4s
+
+    .copy-button
+      position: absolute
+      right: .7rem
+      cursor: pointer
+      transition: color .2s
+
+      &:hover
+        color: $theme-color
+
+  .gutter
+    user-select: none
+
+  .gist table
+    width: auto
+
+    td
+      border: none
+
+  if $highlight_theme == 'mac' || ($highlight_theme == 'mac light')
+    figure.highlight
+      margin: 0 0 1.2rem
+      border-radius: 7px
+      box-shadow: 0 5px 10px 0 $highlight-mac-border
+      -webkit-transform: translateZ(0)
+
+      .highlight-tools
+        &:after
+          position: absolute
+          left: .7rem
+          width: 12px
+          height: 12px
+          border-radius: 50%
+          background: #fc625d
+          box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b
+          content: ' '
+
+        .expand
+          right: 0
+
+          &.closed
+            transition: all .3s
+            transform: rotate(90deg) !important
+
+          & ~ .copy-notice
+            right: 2.8rem
+
+          & ~ .copy-button
+            right: 1.8rem
+
+        .code-lang
+          left: 3.8rem !important

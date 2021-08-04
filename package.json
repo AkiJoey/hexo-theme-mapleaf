@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "description": "A fantastic hexo theme.",
   "scripts": {
-    "lint:script": "dev-scripts lint:script",
-    "lint:style": "dev-scripts lint:style",
     "lint": "dev-scripts lint",
     "test": "dev-scripts test",
     "format": "dev-scripts format",

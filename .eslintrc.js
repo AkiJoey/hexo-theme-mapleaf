@@ -2,7 +2,7 @@
 
 module.exports = {
   extends: '@akijoey',
-  rules: {
-    'no-undef': 0
+  globals: {
+    hexo: 'readonly'
   }
 }

@@ -1,43 +1,31 @@
 {
-  "name": "hexo-theme-lotus",
-  "version": "0.0.1",
+  "name": "hexo-theme-mapleaf",
+  "version": "1.0.0",
   "description": "A fantastic hexo theme.",
-  "scripts": {
-    "lint": "dev-scripts lint",
-    "test": "dev-scripts test",
-    "format": "dev-scripts format",
-    "prepare": "dev-scripts hook"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akijoey/hexo-theme-lotus.git"
-  },
   "keywords": [
     "hexo",
     "theme"
   ],
+  "repository": "github:akijoey/hexo-theme-mapleaf",
+  "homepage": "https://github.com/akijoey/hexo-theme-mapleaf#readme",
+  "bugs": "https://github.com/akijoey/hexo-theme-mapleaf/issues",
   "author": "AkiJoey <akijoey@akijoey.com> (https://akijoey.com)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/akijoey/hexo-theme-lotus/issues"
+  "scripts": {
+    "lint": "devkit lint",
+    "test": "devkit test",
+    "format": "devkit format",
+    "prepare": "devkit prepare",
+    "release": "devkit release"
   },
-  "homepage": "https://github.com/akijoey/hexo-theme-lotus#readme",
   "dependencies": {
-    "hexo-renderer-pug": "^1.0.0",
-    "hexo-renderer-rollup": "^0.0.4",
-    "hexo-renderer-stylus": "^2.0.1"
+    "hexo-renderer-pug": "^3.0.0",
+    "hexo-renderer-rollup": "^1.0.0",
+    "hexo-renderer-stylus": "^2.1.0",
+    "mapleaf": "^1.2.0",
+    "starcasket": "^1.0.2"
   },
   "devDependencies": {
-    "@akijoey/dev-scripts": "^1.0.4",
-    "stylelint-plugin-stylus": "^0.11.0"
-  },
-  "prettier": "@akijoey/prettier-config",
-  "commitlint": {
-    "extends": "@akijoey/commitlint-config"
-  },
-  "lint-staged": {
-    "*.js": "dev-scripts lint:script",
-    "*.styl": "dev-scripts lint:style",
-    "*.{js,styl,json,yml,md}": "dev-scripts format"
+    "@akijoey/devkit": "latest"
   }
 }
